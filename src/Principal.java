@@ -1,8 +1,8 @@
 import java.util.Scanner;
 
 public class Principal {
-    static Disciplina [] disciplinas = new Disciplina[3];
     static Pessoa [] pessoas = new Pessoa[3];
+    static Disciplina [] disciplinas = new Disciplina[3];
     public static void main(String[] args) throws Exception {
         Scanner input = new Scanner(System.in);
 
