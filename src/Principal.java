@@ -1,5 +1,10 @@
-import java.util.Scanner;
+// Integrantes: 
+// Bianca Jesus Dias – 10437274
+// João Pedro Franco Watanabe Torres – 10730384
+// Mariana da Silva Santos – 10722812
+// Renan Rodrigues Oliveira – 10730971
 
+import java.util.Scanner;
 public class Principal {
     static Pessoa [] pessoas = new Pessoa[3];
     static Disciplina [] disciplinas = new Disciplina[3];
