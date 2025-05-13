@@ -1,20 +1,20 @@
-public class Pessoa {
-    String nome;
-    int nascimento;
-    String cep;
-    int telefone;
+public abstract class Pessoa {
+    private String nomeCompleto;
+    private String dataNascimento;
+    private String cep;
+    private String telefone;
 
-    public Pessoa(String nome, int nascimento, String cep, int telefone) {
-        this.nome = nome;
-        this.nascimento = nascimento;
+    public Pessoa(String nomeCompleto, String dataNascimento, String cep, String telefone) {
+        this.nomeCompleto = nomeCompleto;
+        this.dataNascimento = dataNascimento;
         this.cep = cep;
         this.telefone = telefone;
     }
 
-    public void imprimir() {
-        System.out.println("Nome Completo: " + this.nome);
-        System.out.println("Data de nascimento: " + this.nascimento);
-        System.out.println("CEP: " + this.cep);
-        System.out.println("Telefone: " + this.telefone);
-    }
+    public String getNomeCompleto() { return nomeCompleto; }
+    public String getDataNascimento() { return dataNascimento; }
+    public String getCep() { return cep; }
+    public String getTelefone() { return telefone; }
+
+    public abstract void imprimirDados();
 }
