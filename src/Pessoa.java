@@ -11,10 +11,40 @@ public abstract class Pessoa {
         this.telefone = telefone;
     }
 
-    public String getNomeCompleto() { return nomeCompleto; }
-    public String getDataNascimento() { return dataNascimento; }
-    public String getCep() { return cep; }
-    public String getTelefone() { return telefone; }
+    // os get e os set
+    public String getNomeCompleto() { 
+        return nomeCompleto; 
+    }
+
+    public void setNomeCompleto(String nomeCompleto){
+        this.nomeCompleto = nomeCompleto;
+    }
+
+    public String getDataNascimento() { 
+        return dataNascimento; 
+    }
+
+    public void setDataNascimento( String dataNascimento){
+        this.dataNascimento = dataNascimento;
+    }
+
+    public String getCep() { 
+        return cep; 
+    }
+
+    public void setCep(String cep){
+        this.cep = cep;
+    }
+
+    public String getTelefone() { 
+        return telefone; 
+    }
+
+    public void setTelefone(String telefone){
+        this.telefone = telefone;
+    }
+
+    // para coisa tudo
 
     public abstract void imprimirDados();
 }

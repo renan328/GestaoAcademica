@@ -1,17 +1,85 @@
-public class Oferecimento {
-    int codigo;
-    int ano;
-    int semestre;
+import java.util.ArrayList;
 
-    public Oferecimento(int codigo, int ano, int semestre) {
-        this.codigo = codigo;
+public class Oferecimento {
+    // Atributos privados
+    private String codigoOferecimento;
+    private int ano;
+    private int semestre;
+    private Professor professorResponsavel;
+    private ArrayList<Aluno> alunosMatriculados;
+
+    // Construtor
+    public Oferecimento(String codigoOferecimento, int ano, int semestre, Professor professorResponsavel) {
+        this.codigoOferecimento = codigoOferecimento;
         this.ano = ano;
+        this.semestre = semestre;
+        this.professorResponsavel = professorResponsavel;
+        this.alunosMatriculados = new ArrayList<>();
+    }
+
+    // Método para imprimir os dados do oferecimento
+    public void imprimirDados() {
+        System.out.println("Código do Oferecimento: " + codigoOferecimento);
+        System.out.println("Ano: " + ano);
+        System.out.println("Semestre: " + semestre);
+        // System.out.println("Professor Responsável: " + professorResponsavel.getNome()); // assumindo getNome()
+        System.out.println("Alunos Matriculados:");
+
+        if (alunosMatriculados.isEmpty()) {
+            System.out.println("Nenhum aluno matriculado.");
+        } else {
+            for (Aluno aluno : alunosMatriculados) {
+                System.out.println("- " + aluno.getNome()); // assumindo getNome()
+            }
+        }
+    }
+
+    // Método para adicionar um aluno à turma
+    public void adicionarAluno(Aluno aluno) {
+        alunosMatriculados.add(aluno);
+    }
+
+    // Getters e Setters
+    public String getCodigoOferecimento() {
+        return codigoOferecimento;
+    }
+
+    public void setCodigoOferecimento(String codigoOferecimento) {
+        this.codigoOferecimento = codigoOferecimento;
+    }
+
+    public int getAno() {
+        return ano;
+    }
+
+    public void setAno(int ano) {
+        this.ano = ano;
+    }
+
+    public int getSemestre() {
+        return semestre;
+    }
+
+    public void setSemestre(int semestre) {
         this.semestre = semestre;
     }
 
-    public void imprimir() {
-        System.out.println("Código do Oferecimento: " + codigo);
-        System.out.println("Ano: " + ano);
-        System.out.println("Semestre: " + semestre);
+    public Professor getProfessorResponsavel() {
+        return professorResponsavel;
+    }
+
+    public void setProfessorResponsavel(Professor professorResponsavel) {
+        this.professorResponsavel = professorResponsavel;
+    }
+
+    public ArrayList<Aluno> getAlunosMatriculados() {
+        return alunosMatriculados;
+    }
+
+    public void setAlunosMatriculados(ArrayList<Aluno> alunosMatriculados) {
+        this.alunosMatriculados = alunosMatriculados;
     }
 }
+
+// Na inserção de um novo oferecimento, tanto o código da disciplina quanto
+// o DRT do professor devem ser verificados quanto à sua existência.
