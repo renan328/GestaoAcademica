@@ -19,17 +19,18 @@ public class Oferecimento {
 
     // Método para imprimir os dados do oferecimento
     public void imprimirDados() {
+        System.out.println("--- Oferecimento --- ");
         System.out.println("Código do Oferecimento: " + codigoOferecimento);
         System.out.println("Ano: " + ano);
         System.out.println("Semestre: " + semestre);
-        // System.out.println("Professor Responsável: " + professorResponsavel.getNome()); // assumindo getNome()
+        System.out.println("Professor Responsável: " + professorResponsavel.getNome()); // assumindo getNome()
         System.out.println("Alunos Matriculados:");
 
         if (alunosMatriculados.isEmpty()) {
             System.out.println("Nenhum aluno matriculado.");
         } else {
             for (Aluno aluno : alunosMatriculados) {
-                System.out.println("- " + aluno.getNome()); // assumindo getNome()
+                System.out.println("- " + aluno.getNome());
             }
         }
     }
@@ -81,5 +82,3 @@ public class Oferecimento {
     }
 }
 
-// Na inserção de um novo oferecimento, tanto o código da disciplina quanto
-// o DRT do professor devem ser verificados quanto à sua existência.

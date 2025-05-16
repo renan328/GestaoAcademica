@@ -14,7 +14,31 @@ public class Aluno extends Pessoa {
         this.codigosOferecimentosMatriculados = new ArrayList<>();
     }
 
-     public String getNome() {
+    @Override
+    public void imprimirDados() {
+        System.out.println("--- Aluno --- ");
+        System.out.println("Nome: " + getNomeCompleto());
+        System.out.println("Nascimento: " + getDataNascimento());
+        System.out.println("CEP: " + getCep());
+        System.out.println("Telefone: " + getTelefone());
+        System.out.println("RA: " + ra);
+        System.out.println("E-mail: " + email);
+        System.out.println("Curso: " + cursoMatriculado);
+        System.out.println("Oferecimento Matriculados: " + codigosOferecimentosMatriculados);
+    }
+
+    //add e remover abstrato
+    public void adicionarCodigoOferecimento(String codigo){
+        codigosOferecimentosMatriculados.add(codigo);
+        System.out.println("Adicionou " + codigo);
+    }
+    
+    public void removerCodigoOferecimento(String codigo){
+        codigosOferecimentosMatriculados.remove(codigo);
+        System.out.println("Removeu " + codigo);
+    }
+
+    public String getNome() {
         return getNomeCompleto();
     }
 
@@ -65,29 +89,5 @@ public class Aluno extends Pessoa {
 
     public void setCursoMatriculado(String cursoMatriculado){
         this.cursoMatriculado = cursoMatriculado;
-    }
-
-    //add e remover abstrato
-    public void adicionarCodigoOferecimento(String codigo){
-        codigosOferecimentosMatriculados.add(codigo);
-        System.out.println("Adicionou " + codigo);
-    }
-    
-    public void removerCodigoOferecimento(String codigo){
-        codigosOferecimentosMatriculados.remove(codigo);
-        System.out.println("Removeu " + codigo);
-    }
-
-    @Override
-    public void imprimirDados() {
-        System.out.println("Aluno: ");
-        System.out.println("Nome: " + getNomeCompleto());
-        System.out.println("Nascimento: " + getDataNascimento());
-        System.out.println("CEP: " + getCep());
-        System.out.println("Telefone: " + getTelefone());
-        System.out.println("RA: " + ra);
-        System.out.println("E-mail: " + email);
-        System.out.println("Curso: " + cursoMatriculado);
-        System.out.println("Oferecimento Matriculados: " + codigosOferecimentosMatriculados);
     }
 }
