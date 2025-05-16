@@ -11,7 +11,7 @@ public class Principal {
             System.out.println("Nome: ");
             String nome = input.nextLine();
 
-            System.out.println("Ano nascimento: ");
+            System.out.println("Data de nascimento: ");
             int nascimento = input.nextInt();
             input.nextLine();
 
@@ -22,7 +22,7 @@ public class Principal {
             int telefone = input.nextInt();
             input.nextLine();
 
-            pessoas[i] = new Pessoa(nome, nascimento, cep, telefone);
+            // pessoas[i] = new Pessoa(nome, nascimento, cep, telefone);
 
         }
 
@@ -51,7 +51,7 @@ public class Principal {
     public static void listarPessoas(){
         for (int i = 0; i < pessoas.length; i++) {
             System.out.println("\nPessoa " + (i+1) + "\n");
-            pessoas[i].imprimir();
+            // pessoas[i].imprimir();
         }
     }
     
