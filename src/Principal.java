@@ -31,23 +31,88 @@ public class Principal {
             System.out.println("2. Buscar Oferecimento (Disciplina + Código)");
             System.out.println("3. Listar Oferecimentos de uma Disciplina");
             System.out.println("4. Detalhar Oferecimento (alunos, professor, etc.)");
+            System.out.println("5. Cadastrar Aluno");
+            System.out.println("6. Buscar Aluno por RA");
+            System.out.println("0. Buscar todos os Alunos (RA, Curso e Nome))");
             System.out.println("0. Sair");
             System.out.print("Opção: ");
             opcao = scanner.nextInt();
             scanner.nextLine(); // consumir enter
 
             switch (opcao) {
-                case 1 -> cadastrarOferecimento(scanner);
-                case 2 -> buscarOferecimento(scanner);
-                case 3 -> listarOferecimentos(scanner);
-                case 4 -> detalharOferecimento(scanner);
-                case 0 -> System.out.println("Encerrando...");
-                default -> System.out.println("Opção inválida.");
+                case 1 : cadastrarOferecimento(scanner);
+                case 2 : buscarOferecimento(scanner);
+                case 3 : listarOferecimentos(scanner);
+                case 4 : detalharOferecimento(scanner);
+                case 5 : cadastrarAluno(scanner);
+                case 6 : buscarAlunoPorRa(scanner);
+                case 7 : listarAlunos();
+                case 0 : System.out.println("Encerrando...");
+                default : System.out.println("Opção inválida.");
             }
 
         } while (opcao != 0);
 
         scanner.close();
+    }
+
+    public static void cadastrarAluno(Scanner scanner) {
+        System.out.print("Nome completo: ");
+        String nome = scanner.nextLine();
+
+        System.out.print("Data de nascimento (dd/mm/aaaa): ");
+        String nascimento = scanner.nextLine();
+
+        System.out.print("CEP: ");
+        String cep = scanner.nextLine();
+
+        System.out.print("Telefone: ");
+        String telefone = scanner.nextLine();
+
+        System.out.print("RA (registro acadêmico): ");
+        int ra = scanner.nextInt();
+        scanner.nextLine();
+
+        System.out.print("Curso: ");
+        String curso = scanner.nextLine();
+
+        Pessoa aluno = new Aluno(nome, nascimento, cep, telefone, ra, curso);
+        listaPessoas.add(aluno);
+        System.out.println("Aluno cadastrado com sucesso!");
+    }
+
+    public static void buscarAlunoPorRa(Scanner scanner) {
+        System.out.print("Informe o RA do aluno: ");
+        int ra = scanner.nextInt();
+        scanner.nextLine();
+
+        for (Pessoa p : listaPessoas) {
+            if (p instanceof Aluno a && a.getRa() == ra) {
+                System.out.println("Aluno encontrado:");
+                System.out.println("Nome: " + a.getNomeCompleto());
+                System.out.println("Curso: " + a.getCursoMattriculado());
+                System.out.println("RA: " + a.getRa());
+                return;
+            }
+        }
+
+        System.out.println("Aluno com RA " + ra + " não encontrado.");
+    }
+
+    public static void listarAlunos() {
+        System.out.println("--- Lista de Alunos ---");
+        boolean encontrou = false;
+
+        for (Pessoa p : listaPessoas) {
+            if (p instanceof Aluno a) {
+                System.out.println("RA: " + a.getRa() + " | Nome: " + a.getNomeCompleto() + " | Curso: " + a.getCursoMattriculado());
+                encontrou = true;
+            }
+        }
+
+        if (!encontrou) {
+            System.out.println("Nenhum aluno cadastrado.");
+        }
     }
 
     public static void cadastrarOferecimento(Scanner scanner) {
@@ -120,8 +185,8 @@ public class Principal {
 
         System.out.println("--- Oferecimentos da disciplina " + disciplina.getNomeDisciplina() + " ---");
         for (Oferecimento o : disciplina.getListaOferecimentos()) {
-            System.out.println("Ano: " + o.getAno() + ", Semestre: " + o.getSemestre() + ", Código: " + o.getCodigoOferecimento() +
-                    ", Professor: " + o.getProfessorResponsavel().getNomeCompleto());
+            System.out.println(
+                    "Ano: " + o.getAno() + ", Semestre: " + o.getSemestre() + ", Código: " + o.getCodigoOferecimento() + ", Professor: " + o.getProfessorResponsavel().getNomeCompleto());
         }
     }
 
@@ -142,7 +207,7 @@ public class Principal {
         if (o == null) {
             System.out.println("Oferecimento não encontrado.");
         } else {
-           o.imprimirDados();
+            o.imprimirDados();
         }
     }
 
@@ -166,7 +231,7 @@ public class Principal {
     }
 }
 
-// Integrantes: 
+// Integrantes:
 // Bianca Jesus Dias – 10437274
 // João Pedro Franco Watanabe Torres – 10730384
 // Mariana da Silva Santos – 10722812
