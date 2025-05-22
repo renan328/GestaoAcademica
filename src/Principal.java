@@ -11,7 +11,7 @@ public class Principal {
         int opcao;
 
         // Pré-cadastro para testes
-        Pessoa p1 = new Professor("Thiago Donizet", "12/03/1995", "01200-000", "11911112222", 2001, "FCI");
+        Pessoa p1 = new Professor("Thiago Donizetti", "12/03/1995", "01200-000", "11911112222", 2001, "FCI");
         Pessoa a1 = new Aluno("Mariana Silva", "15/03/2003", "01234-567", "11999999999", 101, "SI");
         Pessoa a2 = new Aluno("Bianca Dias", "03/05/2006", "04567-890", "11888888888", 102, "SI");
 
@@ -33,22 +33,22 @@ public class Principal {
             System.out.println("4. Detalhar Oferecimento (alunos, professor, etc.)");
             System.out.println("5. Cadastrar Aluno");
             System.out.println("6. Buscar Aluno por RA");
-            System.out.println("0. Buscar todos os Alunos (RA, Curso e Nome))");
+            System.out.println("7. Buscar todos os Alunos (RA, Curso e Nome))");
             System.out.println("0. Sair");
             System.out.print("Opção: ");
             opcao = scanner.nextInt();
             scanner.nextLine(); // consumir enter
 
             switch (opcao) {
-                case 1 : cadastrarOferecimento(scanner);
-                case 2 : buscarOferecimento(scanner);
-                case 3 : listarOferecimentos(scanner);
-                case 4 : detalharOferecimento(scanner);
-                case 5 : cadastrarAluno(scanner);
-                case 6 : buscarAlunoPorRa(scanner);
-                case 7 : listarAlunos();
-                case 0 : System.out.println("Encerrando...");
-                default : System.out.println("Opção inválida.");
+                case 1 -> cadastrarOferecimento(scanner);
+                case 2 -> buscarOferecimento(scanner);
+                case 3 -> listarOferecimentos(scanner);
+                case 4 -> detalharOferecimento(scanner);
+                case 5 -> cadastrarAluno(scanner);
+                case 6 -> buscarAlunoPorRa(scanner);
+                case 7 -> listarAlunos();
+                case 0 -> System.out.println("Encerrando...");
+                default -> System.out.println("Opção inválida.");
             }
 
         } while (opcao != 0);
@@ -81,6 +81,56 @@ public class Principal {
         System.out.println("Aluno cadastrado com sucesso!");
     }
 
+    // public void cadastrarAlunoEmOferecimento(Scanner scanner) {
+
+    //     // Buscar aluno
+    //     Aluno aluno = null;
+    //     while (aluno == null) {
+    //         System.out.print("RA do aluno: ");
+    //         int ra = scanner.nextInt();
+    //         scanner.nextLine(); // limpa o buffer
+
+    //         aluno = buscarAlunoPorRa(ra);
+
+    //         if (aluno == null) {
+    //             System.out.println("Aluno não encontrado.");
+    //             System.out.print("Deseja tentar novamente? (s para sim / qualquer outra tecla para cancelar): ");
+    //             String opcao = scanner.nextLine();
+    //             if (!opcao.equalsIgnoreCase("s")) {
+    //                 System.out.println("Operação cancelada.");
+    //                 return;
+    //             }
+    //         }
+    //     }
+
+    //     // Buscar oferecimento
+    //     Oferecimento oferecimento = null;
+    //     while (oferecimento == null) {
+    //         System.out.print("Código do oferecimento: ");
+    //         String codigo = scanner.nextLine();
+
+    //         oferecimento = buscarOferecimentoPorCodigo(codigo);
+
+    //         if (oferecimento == null) {
+    //             System.out.println("Oferecimento não encontrado.");
+    //             System.out.print("Deseja tentar novamente? (s para sim / qualquer outra tecla para cancelar): ");
+    //             String opcao = scanner.nextLine();
+    //             if (!opcao.equalsIgnoreCase("s")) {
+    //                 System.out.println("Operação cancelada.");
+    //                 return;
+    //             }
+    //         }
+    //     }
+
+    //     // Cadastrar aluno no oferecimento
+    //     boolean sucesso = oferecimento.adicionarAluno(aluno);
+    //     if (sucesso) {
+    //         System.out.println("Aluno cadastrado com sucesso no oferecimento.");
+    //     } else {
+    //         System.out.println("Aluno já está cadastrado neste oferecimento.");
+    //     }
+    // }
+
     public static void buscarAlunoPorRa(Scanner scanner) {
         System.out.print("Informe o RA do aluno: ");
         int ra = scanner.nextInt();
@@ -88,10 +138,7 @@ public class Principal {
 
         for (Pessoa p : listaPessoas) {
             if (p instanceof Aluno a && a.getRa() == ra) {
-                System.out.println("Aluno encontrado:");
-                System.out.println("Nome: " + a.getNomeCompleto());
-                System.out.println("Curso: " + a.getCursoMattriculado());
-                System.out.println("RA: " + a.getRa());
+                a.imprimirDados();
                 return;
             }
         }
@@ -105,7 +152,8 @@ public class Principal {
 
         for (Pessoa p : listaPessoas) {
             if (p instanceof Aluno a) {
-                System.out.println("RA: " + a.getRa() + " | Nome: " + a.getNomeCompleto() + " | Curso: " + a.getCursoMattriculado());
+                System.out.println("RA: " + a.getRa() + " | Nome: " + a.getNomeCompleto() + " | Curso: "
+                        + a.getCursoMattriculado());
                 encontrou = true;
             }
         }
@@ -116,13 +164,24 @@ public class Principal {
     }
 
     public static void cadastrarOferecimento(Scanner scanner) {
-        System.out.print("Código da disciplina: ");
-        String codDisciplina = scanner.nextLine();
+        Disciplina disciplina = null;
 
-        Disciplina disciplina = buscarDisciplinaPorCodigo(codDisciplina);
-        if (disciplina == null) {
-            System.out.println("Disciplina não encontrada.");
-            return;
+        while (disciplina == null) {
+            System.out.print("Código da disciplina: ");
+            String codDisciplina = scanner.nextLine();
+
+            disciplina = buscarDisciplinaPorCodigo(codDisciplina);
+
+            if (disciplina == null) {
+                System.out.println("Disciplina não encontrada.");
+                System.out.print("Deseja tentar novamente? (s para sim / qualquer outra tecla para cancelar): ");
+                String opcao = scanner.nextLine();
+
+                if (!opcao.equalsIgnoreCase("s")) {
+                    System.out.println("Cadastro cancelado.");
+                    return;
+                }
+            }
         }
 
         System.out.print("Código do oferecimento: ");
@@ -135,14 +194,25 @@ public class Principal {
         int semestre = scanner.nextInt();
         scanner.nextLine();
 
-        System.out.print("DRT do professor: ");
-        int drt = scanner.nextInt();
-        scanner.nextLine();
+        Professor professor = null;
 
-        Professor professor = buscarProfessorPorDrt(drt);
-        if (professor == null) {
-            System.out.println("Professor não encontrado.");
-            return;
+        while (professor == null) {
+            System.out.print("Digite o DRT do professor: ");
+            int drt = scanner.nextInt();
+            scanner.nextLine();
+
+            professor = buscarProfessorPorDrt(drt);
+
+            if (professor == null) {
+                System.out.println("Professor não encontrado.");
+                System.out.print("Deseja tentar novamente? (s para sim / qualquer outra tecla para cancelar): ");
+                String opcao = scanner.nextLine();
+
+                if (!opcao.equalsIgnoreCase("s")) {
+                    System.out.println("Cadastro cancelado.");
+                    return; // Volta ao menu anterior
+                }
+            }
         }
 
         Oferecimento oferecimento = new Oferecimento(codOferecimento, ano, semestre, professor);
@@ -212,15 +282,16 @@ public class Principal {
     }
 
     // Métodos auxiliares
-    private static Disciplina buscarDisciplinaPorCodigo(String codigo) {
-        for (Disciplina d : listaDisciplinas) {
-            if (d.getCodigoDisciplina().equalsIgnoreCase(codigo)) {
-                return d;
+    // Sobrecarga
+    private static Aluno buscarAlunoPorRa(int ra) {
+        for (Pessoa p : listaPessoas) {
+            if (p instanceof Aluno a && a.getRa() == ra) {
+                return a;
             }
         }
         return null;
     }
-
+    
     private static Professor buscarProfessorPorDrt(int drt) {
         for (Pessoa p : listaPessoas) {
             if (p instanceof Professor prof && prof.getDrt() == drt) {
@@ -229,6 +300,25 @@ public class Principal {
         }
         return null;
     }
+    
+    private static Disciplina buscarDisciplinaPorCodigo(String codigo) {
+        for (Disciplina d : listaDisciplinas) {
+            if (d.getCodigoDisciplina().equalsIgnoreCase(codigo)) {
+                return d;
+            }
+        }
+        return null;
+    }
+    
+    // Sobrecarga
+    private static Oferecimento buscarOferecimento(String codDisciplina, String codOferecimento) {
+        Disciplina disciplina = buscarDisciplinaPorCodigo(codDisciplina);
+        if (disciplina != null) {
+            return disciplina.buscarOferecimentoPorCodigo(codOferecimento);
+        }
+        return null;
+    }
+
 }
 
 // Integrantes:
