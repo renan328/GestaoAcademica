@@ -22,6 +22,12 @@ public class Disciplina {
         System.out.println("Nome: " + nomeDisciplina);
         System.out.println("Curso: " + cursoOferecido);
         System.out.println("Oferecimentos:");
+
+        if (listaOferecimentos.isEmpty()) {
+            System.out.println("Nenhum oferecimento cadastrado");
+            return;
+        }
+
         for (Oferecimento o : listaOferecimentos) {
             o.imprimirDados();
         }

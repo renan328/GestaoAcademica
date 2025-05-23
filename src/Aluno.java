@@ -28,9 +28,9 @@ public class Aluno extends Pessoa {
     }
 
     //add e remover abstrato
-    public void adicionarCodigoOferecimento(String codigo){
+    public void adicionarOferecimento(String codigo){
         codigosOferecimentosMatriculados.add(codigo);
-        System.out.println("Adicionou " + codigo);
+        System.out.println("Adicionou " + this.ra + " a " + codigo);
     }
     
     public void removerCodigoOferecimento(String codigo){

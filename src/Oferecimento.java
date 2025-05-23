@@ -29,15 +29,26 @@ public class Oferecimento {
         if (alunosMatriculados.isEmpty()) {
             System.out.println("Nenhum aluno matriculado.");
         } else {
+            System.out.printf("%-3s %-20s %-10s%n", "", "Nome", "RA");
+            System.out.println("----------------------------------------");
+            
             for (Aluno aluno : alunosMatriculados) {
-                System.out.println("- " + aluno.getNome());
+                System.out.printf("%-3s %-20s %-10s%n", "-", aluno.getNome(), aluno.getRa());
             }
         }
     }
 
     // Método para adicionar um aluno à turma
-    public void adicionarAluno(Aluno aluno) {
+    public boolean adicionarAluno(Aluno aluno) {
+        for (Aluno a : alunosMatriculados) {
+            if (a.getRa() == aluno.getRa()) {
+                System.err.println("Aluno já matriculado nesse oefrecimento");
+                return false;
+            }
+        }
+
         alunosMatriculados.add(aluno);
+        return true;
     }
 
     // Getters e Setters
@@ -81,4 +92,3 @@ public class Oferecimento {
         this.alunosMatriculados = alunosMatriculados;
     }
 }
-
