@@ -8,7 +8,7 @@ public class Principal {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int opcao;
+        int opcao = -1;
 
         // Pré-cadastro para testes
         Pessoa p1 = new Professor("Thiago Donizetti", "12/03/1995", "01200-000", "11911112222", 2001, "FCI");
@@ -49,44 +49,51 @@ public class Principal {
             System.out.println("12. Buscar Oferecimento (Disciplina + Código)");
             System.out.println("13. Listar Oferecimentos de uma Disciplina");
             System.out.println("14. Detalhar Oferecimento (Alunos, Professor, etc.)");
-            
+
             // EXTRA
-            System.out.println("15. Listar alunos sem oferecimento");
-            
+            System.out.println("15. Listar quantidade de alunos por oferecimento");
+
             System.out.println("0. Sair");
             System.out.print("Opção: ");
-            opcao = scanner.nextInt();
-            scanner.nextLine();
+            String entrada = scanner.nextLine(); // Sempre lê como String
 
-            switch (opcao) {
-                // ALUNO
-                case 1 -> cadastrarAluno(scanner);
-                case 2 -> buscarAlunoPorRa(scanner);
-                case 3 -> listarAlunos();
-                case 4 -> cadastrarAlunoEmOferecimento(scanner);
+            try {
 
-                // PROFESSOR
-                case 5 -> cadastrarProfessor(scanner);
-                case 6 -> buscarProfessor(scanner);
-                case 7 -> listarProfessores();
+                opcao = Integer.parseInt(entrada);
 
-                // DISCIPLINA
-                case 8 -> cadastrarDisciplina(scanner);
-                case 9 -> buscarDisciplina(scanner);
-                case 10 -> listarTodasDisciplinas();
+                switch (opcao) {
+                    // ALUNO
+                    case 1 -> cadastrarAluno(scanner);
+                    case 2 -> buscarAlunoPorRa(scanner);
+                    case 3 -> listarAlunos();
+                    case 4 -> cadastrarAlunoEmOferecimento(scanner);
 
-                // OFERECIMENTO
-                case 11 -> cadastrarOferecimento(scanner);
-                case 12 -> buscarOferecimento(scanner);
-                case 13 -> listarOferecimentos(scanner);
-                case 14 -> detalharOferecimento(scanner);
+                    // PROFESSOR
+                    case 5 -> cadastrarProfessor(scanner);
+                    case 6 -> buscarProfessor(scanner);
+                    case 7 -> listarProfessores();
 
-                //EXTRA
-                case 15 -> listarAlunosSemOferecimentos();
+                    // DISCIPLINA
+                    case 8 -> cadastrarDisciplina(scanner);
+                    case 9 -> buscarDisciplina(scanner);
+                    case 10 -> listarTodasDisciplinas();
 
-                // SAIR
-                case 0 -> System.out.println("Encerrando...");
-                default -> System.out.println("Opção inválida.");
+                    // OFERECIMENTO
+                    case 11 -> cadastrarOferecimento(scanner);
+                    case 12 -> buscarOferecimento(scanner);
+                    case 13 -> listarOferecimentos(scanner);
+                    case 14 -> detalharOferecimento(scanner);
+
+                    // EXTRA
+                    case 15 -> listarQauntAlunosOferecimento();
+
+                    // SAIR
+                    case 0 -> System.out.println("Encerrando...");
+                    default -> System.out.println("Opção inválida.");
+                }
+
+            } catch (NumberFormatException e) {
+                System.out.println("Por favor, insira um número válido.");
             }
 
         } while (opcao != 0);
@@ -429,23 +436,32 @@ public class Principal {
     }
 
     // Extra
-    public static void listarAlunosSemOferecimentos() {
-        System.out.println("Alunos sem nenhum oferecimento matriculado:");
-        boolean encontrou = false;
+    public static void listarQauntAlunosOferecimento() {
+        int totalOferecimentos = 0;
+        int totalAlunos = 0;
 
-        for (Pessoa p : listaPessoas) {
-            if (p instanceof Aluno) {
-                Aluno aluno = (Aluno) p;
-                if (aluno.getCodigosOferecimentos().isEmpty()) {
-                    System.out.println("RA: " + aluno.getRa() + " | Nome: " + aluno.getNomeCompleto());
-                    encontrou = true;
-                }
+        System.out.println("=== Oferecimentos e quantidade de alunos ===");
+
+        for (Disciplina d : listaDisciplinas) {
+            ArrayList<Oferecimento> listaOferecimentos = d.getListaOferecimentos();
+
+            for (Oferecimento o : listaOferecimentos) {
+                int qtdeAlunos = o.getAlunosMatriculados().size();
+                totalOferecimentos++;
+                totalAlunos += qtdeAlunos;
+
+                System.out.println(
+                        o.getCodigoOferecimento() + " - " + d.getNomeDisciplina() + " – " + qtdeAlunos + " alunos");
             }
         }
 
-        if (!encontrou) {
-            System.out.println("Todos os alunos estão matriculados em algum oferecimento.");
+        if (totalOferecimentos == 0) {
+            System.out.println("Nenhum oferecimento cadastrado.");
+            return;
         }
+
+        double media = (double) totalAlunos / totalOferecimentos;
+        System.out.printf("Média de alunos por oferecimento: %.2f\n", media);
     }
 
     // Métodos auxiliares

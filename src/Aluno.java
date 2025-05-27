@@ -9,7 +9,7 @@ public class Aluno extends Pessoa {
     public Aluno(String nomeCompleto, String dataNascimento, String cep, String telefone, int ra, String cursoMatriculado) {
         super(nomeCompleto, dataNascimento, cep, telefone);
         this.ra = ra;
-        this.email = ra + "mackenzista.com.br"; // criando o email
+        this.email = ra + "@mackenzista.com.br"; // criando o email
         this.cursoMatriculado = cursoMatriculado;
         this.codigosOferecimentosMatriculados = new ArrayList<>();
     }
@@ -76,11 +76,10 @@ public class Aluno extends Pessoa {
 
     public void setRa(int ra) {
         this.ra = ra;
-        this.email = ra + "@mackenzista.com.br"; // aqui atuliza o email, certo??
+        this.email = ra + "@mackenzista.com.br";
     }
 
-    public String getEmail() {// esse get aqui não tem set por causa do email que atualiza automatico la em
-                              // cima ai não deve ser alterado
+    public String getEmail() {
         return email;
     }
 
