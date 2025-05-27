@@ -19,7 +19,6 @@ public class Oferecimento {
 
     // Método para imprimir os dados do oferecimento
     public void imprimirDados() {
-        System.out.println("--- Oferecimento --- ");
         System.out.println("Código do Oferecimento: " + codigoOferecimento);
         System.out.println("Ano: " + ano);
         System.out.println("Semestre: " + semestre);

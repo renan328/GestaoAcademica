@@ -29,7 +29,7 @@ public class Disciplina {
         }
 
         for (Oferecimento o : listaOferecimentos) {
-            o.imprimirDados();
+                System.out.println("- " + o.getCodigoOferecimento() + " (" + o.getAno() + "/" + o.getSemestre() + ") - " + o.getProfessorResponsavel().getNome());
         }
     }
 

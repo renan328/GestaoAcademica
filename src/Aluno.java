@@ -9,7 +9,7 @@ public class Aluno extends Pessoa {
     public Aluno(String nomeCompleto, String dataNascimento, String cep, String telefone, int ra, String cursoMatriculado) {
         super(nomeCompleto, dataNascimento, cep, telefone);
         this.ra = ra;
-        this.email = ra + "mackenzista.com.br"; //criando o email
+        this.email = ra + "mackenzista.com.br"; // criando o email
         this.cursoMatriculado = cursoMatriculado;
         this.codigosOferecimentosMatriculados = new ArrayList<>();
     }
@@ -27,13 +27,13 @@ public class Aluno extends Pessoa {
         System.out.println("Oferecimento Matriculados: " + codigosOferecimentosMatriculados);
     }
 
-    //add e remover abstrato
-    public void adicionarOferecimento(String codigo){
+    // add e remover Oferecimento
+    public void adicionarOferecimento(String codigo) {
         codigosOferecimentosMatriculados.add(codigo);
-        System.out.println("Adicionou " + this.ra + " a " + codigo);
+        System.out.println("Adicionou " + getNomeCompleto() + " a " + codigo);
     }
-    
-    public void removerCodigoOferecimento(String codigo){
+
+    public void removerCodigoOferecimento(String codigo) {
         codigosOferecimentosMatriculados.remove(codigo);
         System.out.println("Removeu " + codigo);
     }
@@ -70,24 +70,30 @@ public class Aluno extends Pessoa {
         setTelefone(telefone);
     }
 
-    public int getRa(){
+    public int getRa() {
         return ra;
     }
 
-    public void setRa(int ra){
+    public void setRa(int ra) {
         this.ra = ra;
         this.email = ra + "@mackenzista.com.br"; // aqui atuliza o email, certo??
     }
 
-    public String getEmail(){//esse get aqui não tem set por causa do email que atualiza automatico la em cima ai não deve ser alterado
+    public String getEmail() {// esse get aqui não tem set por causa do email que atualiza automatico la em
+                              // cima ai não deve ser alterado
         return email;
     }
 
-    public String getCursoMattriculado(){
+    public String getCursoMatriculado() {
         return cursoMatriculado;
     }
 
-    public void setCursoMatriculado(String cursoMatriculado){
+    public void setCursoMatriculado(String cursoMatriculado) {
         this.cursoMatriculado = cursoMatriculado;
     }
+
+    public ArrayList<String> getCodigosOferecimentos() {
+        return this.codigosOferecimentosMatriculados;
+    }
+
 }

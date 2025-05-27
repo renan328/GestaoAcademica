@@ -11,7 +11,7 @@ public abstract class Pessoa {
         this.telefone = telefone;
     }
 
-    // os get e os set
+    // os Getters e Setters
     public String getNomeCompleto() { 
         return nomeCompleto; 
     }
@@ -43,8 +43,6 @@ public abstract class Pessoa {
     public void setTelefone(String telefone){
         this.telefone = telefone;
     }
-
-    // para coisa tudo
 
     public abstract void imprimirDados();
 }
