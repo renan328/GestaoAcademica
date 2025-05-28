@@ -18,6 +18,13 @@ public class Principal {
         Disciplina d1 = new Disciplina("ADS01", "POO", "SI");
         Disciplina d2 = new Disciplina("ADS02", "Banco de Dados", "SI");
 
+        Oferecimento o1 = new Oferecimento("ADS01M1", 2024, 1, (Professor) p1);
+        Oferecimento o2 = new Oferecimento("ADS02M1", 2024, 2, (Professor) p1);
+
+        // Associar os oferecimentos às disciplinas
+        d1.adicionarOferecimento(o1);
+        d2.adicionarOferecimento(o2);
+
         listaPessoas.add(p1);
         listaPessoas.add(a1);
         listaPessoas.add(a2);
@@ -229,7 +236,7 @@ public class Principal {
         System.out.print("Unidade Acadêmica: ");
         String unidade = scanner.nextLine();
 
-        Professor professor = new Professor(nome, dataNascimento, cep, telefone, drt, unidade);
+        Pessoa professor = new Professor(nome, dataNascimento, cep, telefone, drt, unidade);
         listaPessoas.add(professor);
 
         System.out.println("Professor cadastrado com sucesso.");
@@ -451,7 +458,7 @@ public class Principal {
                 totalAlunos += qtdeAlunos;
 
                 System.out.println(
-                        o.getCodigoOferecimento() + " - " + d.getNomeDisciplina() + " – " + qtdeAlunos + " alunos");
+                        o.getCodigoOferecimento() + " - " + d.getNomeDisciplina() + " - " + qtdeAlunos + " alunos");
             }
         }
 
@@ -465,6 +472,7 @@ public class Principal {
     }
 
     // Métodos auxiliares
+
     // Sobrecarga
     private static Aluno buscarAlunoPorRa(int ra) {
         for (Pessoa p : listaPessoas) {
